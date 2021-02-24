@@ -2,7 +2,7 @@ import numpy as np
 
 def init_params(L_dims):
     """
-    initialize the parameters such as the weight and bias in 0 
+    initialize hyper parameters w and b 
     """
     np.random.seed(3)
     params = {}
@@ -15,8 +15,8 @@ def init_params(L_dims):
     return params
 
 #sanity check
-parameters = init_params([5,4,3])
-print("W1 = " + str(parameters["W1"]))
-print("b1 = " + str(parameters["b1"]))
-print("W2 = " + str(parameters["W2"]))
-print("b2 = " + str(parameters["b2"]))
+#parameters = init_params([5,4,3])
+#print("W1 = " + str(parameters["W1"]))
+#print("b1 = " + str(parameters["b1"]))
+#print("W2 = " + str(parameters["W2"]))
+#print("b2 = " + str(parameters["b2"]))
