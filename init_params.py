@@ -9,7 +9,7 @@ def init_params(L_dims):
     L = len(L_dims)
 
     for l in range(1,L):
-        params ['W' + str(l)] = np.random.rand(L_dims[l],L_dims[0]) * 0.01
+        params ['W' + str(l)] = np.random.rand(L_dims[l],L_dims[l-1]) * 0.01
         params ["b" + str(l)] = np.zeros((L_dims[l], 1))
 
     return params

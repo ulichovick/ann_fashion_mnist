@@ -4,7 +4,7 @@ def hypothesis(A, W, b):
     """
     hypothesis 
     """
-    Z = np.dot(W,A)+b
+    Z = np.dot(A,W.T)+b
 
     cache = (A,W,b)
     return Z, cache

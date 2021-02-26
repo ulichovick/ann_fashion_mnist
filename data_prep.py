@@ -18,9 +18,9 @@ def data_preparation():
                     "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
 
     #show an image example of the data with their class name
-    plt.imshow(x_train_full[0])
-    plt.title(class_names[y_train_full[0]])
-    plt.show()
+    #plt.imshow(x_train_full[0])
+    #plt.title(class_names[y_train_full[0]])
+    #plt.show()
 
     #normalize the data so that they are the same scale
     x_train_norm = x_train_full / 255
@@ -33,14 +33,14 @@ def data_preparation():
 
     #reshape the matrix data into a single vector 28 * 28 = 784 and put proper dimensions to (x,) arrays
     #maybe needed for loss function idk xD
-    print(str(shape(y_train.reshape(1,-1))))
+    #print(str(shape(y_train.reshape(1,-1))))
     y_train = y_train.reshape(1,-1)
     y_test = y_test.reshape(1,-1)
     y_valid = y_valid.reshape(1,-1)
-    print(y_train)
-    plt.imshow(X_train[1])
-    plt.title(class_names[y_train[0][1]])
-    plt.show()
+    #print(y_train)
+    #plt.imshow(X_train[1])
+    #plt.title(class_names[y_train[0][1]])
+    #plt.show()
 
     X_valid = X_valid.reshape(X_valid.shape[0], -1).T
     X_train = X_train.reshape(X_train.shape[0], -1).T
@@ -53,7 +53,6 @@ def data_preparation():
 
 #trace memory
 #tracemalloc.start()
-
 data_preparation()
 #display the memory usage
 #snapshot = tracemalloc.take_snapshot()
