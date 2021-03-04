@@ -1,6 +1,6 @@
 import numpy as np
 from hypothesis import hypothesis
-from hidden_activation import sigmoid
+from sigmoid import sigmoid
 
 def activation(A_prev, W, b):
     """
