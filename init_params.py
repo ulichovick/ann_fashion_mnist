@@ -16,7 +16,4 @@ def init_params(L_dims):
 
 #sanity check
 #parameters = init_params([5,4,3])
-#print("W1 = " + str(parameters["W1"]))
-#print("b1 = " + str(parameters["b1"]))
-#print("W2 = " + str(parameters["W2"]))
-#print("b2 = " + str(parameters["b2"]))
+#print("parameters  = " + str(parameters))

@@ -45,10 +45,10 @@ def data_preparation():
     X_valid = X_valid.reshape(X_valid.shape[0], -1).T
     X_train = X_train.reshape(X_train.shape[0], -1).T
     X_test = X_test.reshape(X_test.shape[0], -1).T
-    print("Train set shape" + str(X_train.shape))
-    print("Validation set shape" + str(X_valid.shape))
-    print("Test set shape" + str(X_test.shape))
-    print("train classes shape" + str(y_train.shape))
+    #print("Train set shape" + str(X_train.shape))
+    #print("Validation set shape" + str(X_valid.shape))
+    #print("Test set shape" + str(X_test.shape))
+    #print("train classes shape" + str(y_train.shape))
     return X_train, y_train, X_valid, y_valid, X_test, y_test
 
 #trace memory

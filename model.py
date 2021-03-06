@@ -28,6 +28,6 @@ def model(X, Y, layer_dims, learning_rate=0.0055, num_iters=5000, print_cost=Fal
         if print_cost and i % 100 == 0:
             costs.append(cost)
 
-dims = [784, 20, 7, 5, 4]
+dims = [784, 20, 7, 5, 10]
 X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
 model(X_train, y_train, layer_dims=dims, num_iters=2500,print_cost=True)
