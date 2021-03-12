@@ -53,7 +53,6 @@ def data_preparation():
 
 #trace memory
 #tracemalloc.start()
-data_preparation()
 #display the memory usage
 #snapshot = tracemalloc.take_snapshot()
 #top_stats = snapshot.statistics('lineno')

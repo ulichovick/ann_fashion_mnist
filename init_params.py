@@ -15,5 +15,5 @@ def init_params(L_dims):
     return params
 
 #sanity check
-#parameters = init_params([5,4,3])
+#parameters = init_params([5,3,3])
 #print("parameters  = " + str(parameters))
