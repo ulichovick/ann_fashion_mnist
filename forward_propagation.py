@@ -15,13 +15,15 @@ def fw_prop(X, params):
         A_prev = A
         A, cache = activation(A_prev,
                             params['W' + str(l)],
-                            params['b' + str(l)])
+                            params['b' + str(l)],
+                            activation="sigmoid")
         caches.append(cache)
 
-    A, cache = activation(A,
+    AL, cache = activation(A,
                         params['W' + str(L)],
-                        params['b' + str(L)])
-    AL = softmax(A)
+                        params['b' + str(L)], 
+                        activation="softmax")
+    #AL = softmax(A)
     caches.append(cache)
 
     return AL, caches, acache

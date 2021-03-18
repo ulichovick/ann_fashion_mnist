@@ -23,6 +23,8 @@ def backpropagation(AL, Y, caches, acache):
     #last layer derivative
     # temp dAL = - (np.divide(Y,AL) - np.divide( 1 - Y, 1 - AL))
     #current_cache = caches[-1]
+    #print("yhat: "+ str(AL.shape))
+    #print("y: " + str(Y.shape))
     dZ_temp = AL - Y
     dW_temp = 1/m * np.dot(dZ_temp, acache["a" + str(L-1)].T)
     db_temp = 1/m * np.sum(dZ_temp,axis=1,keepdims=True)

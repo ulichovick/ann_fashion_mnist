@@ -31,13 +31,19 @@ def data_preparation():
     y_valid, y_train = y_train_full[:5000], y_train_full[5000:]
     X_test = x_test_norm
 
-    #reshape the matrix data into a single vector 28 * 28 = 784 and put proper dimensions to (x,) arrays
+    #reshape the matrix data into a single vector 28 * 28 = 784 and put proper dimensions to (10,m) arrays
     #maybe needed for loss function idk xD
     #print(str(shape(y_train.reshape(1,-1))))
-    y_train = y_train.reshape(1,-1)
-    y_test = y_test.reshape(1,-1)
-    y_valid = y_valid.reshape(1,-1)
-    #print(y_train)
+
+    y_train = keras.utils.to_categorical(y_train)
+    y_test = keras.utils.to_categorical(y_test)
+    y_valid = keras.utils.to_categorical(y_valid)
+    y_train = y_train.T
+    y_test = y_test.T
+    y_valid = y_valid.T
+    
+    #assert the shapes
+    # print(y_train.shape)
     #plt.imshow(X_train[1])
     #plt.title(class_names[y_train[0][1]])
     #plt.show()
