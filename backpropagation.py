@@ -37,5 +37,5 @@ def backpropagation(AL, Y, caches, acache):
         db_temp = 1/m * np.sum(dZ_temp,axis=1,keepdims=True)
         grads["dW" + str(l + 1)] = dW_temp
         grads["db" + str(l + 1)] = db_temp
-
+    del caches, A_caches, Z_caches, W_caches, b_caches
     return grads
