@@ -16,21 +16,15 @@ def backpropagation(AL, Y, caches, acache):
     
     for l in range(L):
         acache["a" + str(l + 1)] = A_caches[l]
-        acache["w" + str(l + 1)] = W_caches[l]
-        acache["b" + str(l + 1)] = b_caches[l]
-        acache["z" + str(l + 1)] = Z_caches[l]
 
     #last layer derivative
-    # temp dAL = - (np.divide(Y,AL) - np.divide( 1 - Y, 1 - AL))
-    #current_cache = caches[-1]
-    #print("yhat: "+ str(AL.shape))
-    #print("y: " + str(Y.shape))
     dZ_temp = AL - Y
     dW_temp = 1/m * np.dot(dZ_temp, acache["a" + str(L-1)].T)
     db_temp = 1/m * np.sum(dZ_temp,axis=1,keepdims=True)
     grads["dW" + str(L)] = dW_temp
     grads["db" + str(L)] = db_temp
 
+    #hidden layer derivatives
     for l in reversed(range(L-1)):
         
         #hidden layers derivatives
@@ -38,7 +32,7 @@ def backpropagation(AL, Y, caches, acache):
         one = np.ones(shape(Z_caches[l]))
         sigmoid_caches,temp = sigmoid(Z_caches[l])
         del temp
-        dZ_temp = np.multiply(dA_prev_temp, np.multiply(sigmoid_caches, sigmoid_caches - 1))
+        dZ_temp = np.multiply(dA_prev_temp, np.multiply(sigmoid_caches,1 - sigmoid_caches))
         dW_temp = 1/m * np.dot(dZ_temp, acache["a" + str(l)].T)
         db_temp = 1/m * np.sum(dZ_temp,axis=1,keepdims=True)
         grads["dW" + str(l + 1)] = dW_temp
