@@ -13,7 +13,3 @@ def init_params(L_dims):
         params ["b" + str(l)] = np.zeros((L_dims[l], 1))
 
     return params
-
-#sanity check
-#parameters = init_params([5,3,3])
-#print("parameters  = " + str(parameters))

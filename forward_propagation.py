@@ -1,6 +1,4 @@
-import numpy as np
 from activation_neurons import activation
-from softmax import softmax
 
 def fw_prop(X, params):
     """
@@ -23,7 +21,6 @@ def fw_prop(X, params):
                         params['W' + str(L)],
                         params['b' + str(L)], 
                         activation="softmax")
-    #AL = softmax(A)
     caches.append(cache)
 
     return AL, caches, acache

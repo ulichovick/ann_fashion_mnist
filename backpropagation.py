@@ -1,6 +1,4 @@
 import numpy as np
-from numpy.core.fromnumeric import shape,reshape
-from sigmoid import sigmoid
 
 def backpropagation(AL, Y, caches, acache):
     """

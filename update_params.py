@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.fromnumeric import shape,reshape
 
 def update(parameters, grads, learning_rate):
     """

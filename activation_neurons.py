@@ -2,7 +2,6 @@ import numpy as np
 from hypothesis import hypothesis
 from sigmoid import sigmoid
 from softmax import softmax
-from numpy.core.fromnumeric import reshape, shape, size
 
 def activation(A_prev, W, b, activation = ""):
     """

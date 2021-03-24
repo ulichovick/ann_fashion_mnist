@@ -1,9 +1,5 @@
-from numpy.core.fromnumeric import reshape, shape, size
 from tensorflow import keras
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import numpy as np
-import tracemalloc
+
 def data_preparation():
     """
     this function extracts the dataset
@@ -51,7 +47,9 @@ def data_preparation():
     X_valid = X_valid.reshape(X_valid.shape[0], -1).T
     X_train = X_train.reshape(X_train.shape[0], -1).T
     X_test = X_test.reshape(X_test.shape[0], -1).T
-    #print("Train set shape" + str(X_train.shape))
+    test = X_train[:,0]
+    test = test.reshape(len(X_train), 1)
+    #print("Train set shape" + str(test.shape))
     #print("Validation set shape" + str(X_valid.shape))
     #print("Test set shape" + str(X_test.shape))
     #print("train classes shape" + str(y_train.shape))
@@ -62,7 +60,7 @@ def data_preparation():
 #display the memory usage
 #snapshot = tracemalloc.take_snapshot()
 #top_stats = snapshot.statistics('lineno')
-
+data_preparation()
 #print("[ Top 10 ]")
 #for stat in top_stats[:10]:
 #    print(stat)
