@@ -1,3 +1,4 @@
+from numpy.core.fromnumeric import shape
 from update_params import update
 import numpy as np
 from init_params import init_params
@@ -43,13 +44,14 @@ def model(X, Y, layer_dims, learning_rate=0.01, num_iters=5, print_cost=False ):
 
 
 start_time = time.time()
-dims = [784, 50, 50, 10]
+dims = [784, 300, 100, 10]
 X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
-parameters = model(X_train, y_train, layer_dims=dims, num_iters=20,print_cost=True)
+parameters = model(X_train, y_train, layer_dims=dims, num_iters=10,print_cost=True)
 
-Y_prediction_train = predict(parameters,X_train,y_train)
-print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - y_train)) * 100))
+#Y_prediction_train = predict(parameters,X_train,y_train)
+#print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - y_train)) * 100))
 
 Y_prediction_valid = predict(parameters,X_valid,y_valid)
-print("validation accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_valid - y_valid)) * 100))
+y_valid = np.argmax(y_valid, axis=0)
+print("validation accuracy: {} %".format(np.mean(Y_prediction_valid == y_valid) * 100))
 print("--- %s seconds ---" % round(time.time() - start_time, 2))

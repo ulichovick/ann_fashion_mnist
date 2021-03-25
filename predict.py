@@ -33,8 +33,7 @@ def predict(params,data,y):
     #plt.show()
 
     caches = []
-    A = data[:,0]
-    A = A.reshape((len(A),1))
+    A = data
     #print(A.shape)
 
     L = len(params) //2
@@ -44,16 +43,18 @@ def predict(params,data,y):
                             params['W' + str(l)],
                             params['b' + str(l)],
                             activation="sigmoid")
-        caches.append(cache)
+
     AL, cache = activation(A,
                         params['W' + str(L)],
                         params['b' + str(L)], 
                         activation="softmax")
-    print(shape(AL))
-    predictions = np.argmax(AL)
-    print(AL)
-    print(y[:,0])
-    print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
+    #print(shape(AL))
+    predictions = np.argmax(AL, axis=0)
+    #print(shape(predictions))
+    caches.append(predictions)
+    #print(AL)
+    #print(y[:,0])
+    #print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
     clas = np.argmax(y[:,0])
-    print("The actual class: " + str(np.array(class_names)[clas]))
+    #print("The actual class: " + str(np.array(class_names)[clas]))
     return predictions
