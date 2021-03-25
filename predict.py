@@ -4,7 +4,7 @@ from PIL import Image
 import PIL.ImageOps 
 import matplotlib.pyplot as plt
 
-def predict(params,data):
+def predict(params,data,y):
     """
     try to predict
     """
@@ -22,17 +22,18 @@ def predict(params,data):
     width = 28
     fname = fname.resize((width,height))
     image = np.asarray(fname)
-    print(image.shape)
+    #print(image.shape)
     my_image = image/255.
     my_image = my_image.reshape(28,28)
     my_image = my_image.reshape(1,-1)
-    print(my_image.shape)
+    #print(my_image.shape)
 
     #plt.imshow(image)
     #plt.show()
 
     caches = []
-    A = data
+    A = data[:,0]
+    A = A.reshape((len(A),1))
     #print(A.shape)
 
     L = len(params) //2
@@ -50,5 +51,7 @@ def predict(params,data):
     #print(AL)
     predictions = np.argmax(AL)
     #print(predictions)
-    #print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
+    print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
+    clas = np.argmax(y[:,0])
+    print("The actual class: " + str(np.array(class_names)[clas]))
     return predictions

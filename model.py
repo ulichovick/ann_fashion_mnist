@@ -10,7 +10,7 @@ from predict import predict
 import matplotlib.pyplot as plt
 import time
 
-def model(X, Y, layer_dims, learning_rate=0.01, num_iters=5, print_cost=False ):
+def model(X, Y, layer_dims, learning_rate=0.005, num_iters=5, print_cost=False ):
     """
     unify and implement the model
     """
@@ -39,12 +39,17 @@ def model(X, Y, layer_dims, learning_rate=0.01, num_iters=5, print_cost=False ):
     plt.xlabel('iterations (per hundreds)')
     plt.title("Learning rate =" + str(learning_rate))
     #plt.show()
-    Y_prediction_train = predict(parameters,X)
-    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y)) * 100))
+    return parameters
 
 
 start_time = time.time()
-dims = [784, 100, 100, 10]
+dims = [784, 50, 50, 10]
 X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
-model(X_train, y_train, layer_dims=dims, num_iters=500,print_cost=True)
+parameters = model(X_train, y_train, layer_dims=dims, num_iters=200,print_cost=True)
+
+Y_prediction_train = predict(parameters,X_train,y_train)
+print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - y_train)) * 100))
+
+Y_prediction_valid = predict(parameters,X_valid,y_valid)
+print("validation accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_valid - y_valid)) * 100))
 print("--- %s seconds ---" % round(time.time() - start_time, 2))
