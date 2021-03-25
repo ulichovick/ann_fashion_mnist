@@ -44,9 +44,9 @@ def model(X, Y, layer_dims, learning_rate=0.01, num_iters=5, print_cost=False ):
 
 
 start_time = time.time()
-dims = [784, 300, 100, 10]
+dims = [784, 50, 50, 10]
 X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
-parameters = model(X_train, y_train, layer_dims=dims, num_iters=10,print_cost=True)
+parameters = model(X_train, y_train, layer_dims=dims, num_iters=1000,print_cost=True)
 
 #Y_prediction_train = predict(parameters,X_train,y_train)
 #print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - y_train)) * 100))

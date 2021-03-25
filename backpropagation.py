@@ -29,10 +29,9 @@ def backpropagation(AL, Y, caches, acache):
 
         #hidden layers derivatives
         dA_prev_temp = np.dot(W_caches[l+1].T, dZ_temp)
-        sigmoid_caches,temp = sigmoid(Z_caches[l])
-        del temp
+
         #print(shape(sigmoid_caches))
-        dZ_temp = np.multiply(dA_prev_temp, np.multiply(sigmoid_caches,1 - sigmoid_caches))
+        dZ_temp = np.multiply(dA_prev_temp, np.multiply(acache["a" + str(l+1)],1 - acache["a" + str(l+1)]))
         dW_temp = 1/m * np.dot(dZ_temp, acache["a" + str(l)].T)
         db_temp = 1/m * np.sum(dZ_temp,axis=1,keepdims=True)
         grads["dW" + str(l + 1)] = dW_temp
