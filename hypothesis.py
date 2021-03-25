@@ -6,4 +6,4 @@ def hypothesis(A, W, b):
     """
     Z = np.dot(W,A)+b
 
-    return Z, W, b, A
+    return Z, W, b

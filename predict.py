@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 import PIL.ImageOps 
 import matplotlib.pyplot as plt
+from numpy.core.fromnumeric import shape
 
 def predict(params,data,y):
     """
@@ -48,9 +49,10 @@ def predict(params,data,y):
                         params['W' + str(L)],
                         params['b' + str(L)], 
                         activation="softmax")
-    #print(AL)
+    print(shape(AL))
     predictions = np.argmax(AL)
-    #print(predictions)
+    print(AL)
+    print(y[:,0])
     print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
     clas = np.argmax(y[:,0])
     print("The actual class: " + str(np.array(class_names)[clas]))

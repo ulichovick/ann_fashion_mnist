@@ -55,7 +55,7 @@ def data_preparation():
     X_test = X_test.reshape(X_test.shape[0], -1).T
     #test = X_train[:,0]
     #test = test.reshape(len(X_train), 1)
-    print("Train set shape " + str(np.array(y_valid[:,0])))
+    #print("Train set shape " + str(np.array(y_valid[:,0])))
     #print("Validation set shape" + str(X_valid.shape))
     #print("Test set shape" + str(X_test.shape))
     #print("train classes shape" + str(y_train.shape))

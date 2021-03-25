@@ -4,7 +4,7 @@ def init_params(L_dims):
     """
     initialize hyper parameters w and b 
     """
-    np.random.seed(3)
+    np.random.seed(42)
     params = {}
     L = len(L_dims)
 
