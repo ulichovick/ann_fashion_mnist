@@ -10,7 +10,7 @@ def backpropagation(AL, Y, caches, acache):
     L = len(caches)
     m = AL.shape[1]
     #Y = Y.reshape(AL.shape)
-    #TODO: temporary fixed the caches, still pendant a better fix with the A0 or X
+    #TODO: http://www.adeveloperdiary.com/data-science/deep-learning/neural-network-with-softmax-in-python/ looks promising lets follow that
     caches = np.array(caches, dtype=object)
     A_caches, W_caches, b_caches, Z_caches = caches.T
     
