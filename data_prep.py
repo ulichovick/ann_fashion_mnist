@@ -60,13 +60,3 @@ def data_preparation():
     #print("Test set shape" + str(X_test.shape))
     #print("train classes shape" + str(y_train.shape))
     return X_train, y_train, X_valid, y_valid, X_test, y_test
-
-#trace memory
-#tracemalloc.start()
-#display the memory usage
-#snapshot = tracemalloc.take_snapshot()
-#top_stats = snapshot.statistics('lineno')
-data_preparation()
-#print("[ Top 10 ]")
-#for stat in top_stats[:10]:
-#    print(stat)

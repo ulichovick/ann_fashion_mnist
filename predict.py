@@ -5,7 +5,7 @@ import PIL.ImageOps
 import matplotlib.pyplot as plt
 from numpy.core.fromnumeric import shape
 
-def predict(params,data,y):
+def predict(params,data):
     """
     try to predict
     """
@@ -24,18 +24,15 @@ def predict(params,data,y):
     width = 28
     fname = fname.resize((width,height))
     image = np.asarray(fname)
-    #print(image.shape)
+
     my_image = image/255.
     my_image = my_image.reshape(28,28)
     my_image = my_image.reshape(1,-1)
-    print(my_image.shape)
 
     plt.imshow(image)
     plt.show()
 
-    caches = []
     A = my_image.T
-    print(A.shape)
 
     L = len(params) //2
     for l in range(1,L):
@@ -49,13 +46,9 @@ def predict(params,data,y):
                         params['W' + str(L)],
                         params['b' + str(L)], 
                         activation="softmax")
-    #print(shape(AL))
+
     predictions = np.argmax(AL, axis=0)
-    #print(shape(predictions))
-    caches.append(predictions)
-    #print(AL)
-    #print(y[:,0])
-    print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
-    #clas = np.argmax(y[:,0])
-    #print("The actual class: " + str(np.array(class_names)[clas]))
+    del cache
+    print("The network predicts: " + str(np.array(class_names)[predictions]))
+
     return predictions

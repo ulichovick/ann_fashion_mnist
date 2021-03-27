@@ -1,4 +1,3 @@
-from numpy.core.fromnumeric import shape
 from activation_neurons import activation
 
 def fw_prop(X, params):

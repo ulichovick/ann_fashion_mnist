@@ -1,6 +1,4 @@
 import numpy as np
-from numpy.core.fromnumeric import shape
-from sigmoid import sigmoid
 
 def backpropagation(AL, Y, caches, acache):
     """
@@ -9,8 +7,6 @@ def backpropagation(AL, Y, caches, acache):
     grads = {}
     L = len(caches)
     m = AL.shape[1]
-    #Y = Y.reshape(AL.shape)
-    #TODO: http://www.adeveloperdiary.com/data-science/deep-learning/neural-network-with-softmax-in-python/ looks promising lets follow that
     caches = np.array(caches, dtype=object)
     A_caches, W_caches, b_caches, Z_caches = caches.T
     
@@ -29,8 +25,6 @@ def backpropagation(AL, Y, caches, acache):
 
         #hidden layers derivatives
         dA_prev_temp = np.dot(W_caches[l+1].T, dZ_temp)
-
-        #print(shape(sigmoid_caches))
         dZ_temp = np.multiply(dA_prev_temp, np.multiply(acache["a" + str(l+1)],1 - acache["a" + str(l+1)]))
         dW_temp = 1/m * np.dot(dZ_temp, acache["a" + str(l)].T)
         db_temp = 1/m * np.sum(dZ_temp,axis=1,keepdims=True)
