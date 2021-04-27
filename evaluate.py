@@ -2,6 +2,7 @@ from activation_neurons import activation
 import numpy as np
 from PIL import Image
 import PIL.ImageOps 
+from data_prep import data_preparation
 
 def evaluate(params,data,y):
     """
@@ -47,3 +48,20 @@ def evaluate(params,data,y):
     caches.append(predictions)
 
     return predictions
+
+
+X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
+
+parameters = np.load('parameters.npy', allow_pickle=True)[()]
+
+Y_prediction_train = evaluate(parameters,X_train,y_train)
+y_train = np.argmax(y_train, axis=0)
+print("train accuracy: {} %".format(np.mean(Y_prediction_train == y_train) * 100))
+
+Y_prediction_valid = evaluate(parameters,X_valid,y_valid)
+y_valid = np.argmax(y_valid, axis=0)
+print("validation accuracy: {} %".format(np.mean(Y_prediction_valid == y_valid) * 100))
+
+Y_prediction_test = evaluate(parameters,X_test,y_test)
+y_test = np.argmax(y_test, axis=0)
+print("test accuracy: {} %".format(np.mean(Y_prediction_test == y_test) * 100))
