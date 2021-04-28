@@ -2,9 +2,9 @@ from activation_neurons import activation
 import numpy as np
 from PIL import Image
 import PIL.ImageOps 
-import matplotlib.pyplot as plt
+from data_prep import data_preparation
 
-def predict(params,data):
+def evaluate(params,data,y):
     """
     try to predict
     """
@@ -12,13 +12,11 @@ def predict(params,data):
                 "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
 
     #open the image and convert it to black and white or greyscale
-    file = data
-    fname = Image.open(file).convert('L')
+    fname = Image.open('camiseta.jpg').convert('L')
 
     #invert the colors (the dataset is trained inverted, so the clothes are in white and the background in black)
     fname = PIL.ImageOps.invert(fname)
     
-    fname.save('graysc.png')
     height = 28
     width = 28
     fname = fname.resize((width,height))
@@ -28,10 +26,8 @@ def predict(params,data):
     my_image = my_image.reshape(28,28)
     my_image = my_image.reshape(1,-1)
 
-    plt.imshow(image)
-    plt.show()
-
-    A = my_image.T
+    caches = []
+    A = data
 
     L = len(params) //2
     for l in range(1,L):
@@ -47,11 +43,24 @@ def predict(params,data):
                         activation="softmax")
 
     predictions = np.argmax(AL, axis=0)
-    del cache
-    print("The network predicts: " + str(np.array(class_names)[predictions]))
+
+    caches.append(predictions)
 
     return predictions
 
+
+X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
+
 parameters = np.load('parameters.npy', allow_pickle=True)[()]
 
-Y_prediction_valid = predict(parameters,"camisa.jpg")
+Y_prediction_train = evaluate(parameters,X_train,y_train)
+y_train = np.argmax(y_train, axis=0)
+print("train accuracy: {} %".format(np.mean(Y_prediction_train == y_train) * 100))
+
+Y_prediction_valid = evaluate(parameters,X_valid,y_valid)
+y_valid = np.argmax(y_valid, axis=0)
+print("validation accuracy: {} %".format(np.mean(Y_prediction_valid == y_valid) * 100))
+
+Y_prediction_test = evaluate(parameters,X_test,y_test)
+y_test = np.argmax(y_test, axis=0)
+print("test accuracy: {} %".format(np.mean(Y_prediction_test == y_test) * 100))
