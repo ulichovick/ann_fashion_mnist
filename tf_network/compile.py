@@ -13,7 +13,6 @@ def compile(model, X_train, Y_train, X_valid, Y_valid):
                     metrics=["accuracy"])
     model_history = model.fit(X_train, Y_train, epochs=30,
                                 validation_data = (X_valid,Y_valid))
-    print(model_history.params)
     pd.DataFrame(model_history.history).plot(figsize=(8, 5))
     plt.grid(True)
     plt.gca().set_ylim(0, 1)

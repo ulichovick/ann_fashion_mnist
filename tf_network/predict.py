@@ -1,29 +1,32 @@
+from data_prep import data_prep
 import numpy as np
 from PIL import Image
 import PIL.ImageOps 
-import scipy.misc
 import matplotlib.pyplot as plt
+from tensorflow import keras
 
-def predict(model, class_names):
+def predict(model):
     """
     make predictions
     """
+    class_names = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
+                "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
+    model = keras.models.load_model("ann_tf_fashmnist.h5")
     #open the image and convert it to black and white or greyscale
     fname = Image.open('camiseta.jpg').convert('L')
 
     #invert the colors (the dataset is trained inverted, so the clothes are in white and the background in black)
     fname = PIL.ImageOps.invert(fname)
     
-    fname.save('graysc.png')
     height = 28
     width = 28
     fname = fname.resize((width,height))
     image = np.asarray(fname)
-    print(image.shape)
+
     my_image = image/255.
     my_image = my_image.reshape(28,28)
     my_image = my_image.reshape(1,-1)
-    print(my_image.shape)
+
 
     plt.imshow(image)
     plt.show()
@@ -32,3 +35,6 @@ def predict(model, class_names):
     predictions = np.argmax(y_pred)
     print(predictions)
     print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
+
+model = keras.models.load_model("ann_tf_fashmnist.h5")
+predict(model)
