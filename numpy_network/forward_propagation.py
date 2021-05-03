@@ -1,4 +1,4 @@
-from activation_neurons import activation
+from .activation_neurons import activation
 
 def fw_prop(X, params):
     """

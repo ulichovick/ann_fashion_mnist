@@ -1,8 +1,8 @@
-from activation_neurons import activation
+from .activation_neurons import activation
 import numpy as np
 from PIL import Image
 import PIL.ImageOps 
-from data_prep import data_preparation
+from .data_prep import data_preparation
 
 def evaluate(params,data,y):
     """

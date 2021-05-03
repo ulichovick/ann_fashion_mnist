@@ -1,4 +1,4 @@
-from activation_neurons import activation
+from .activation_neurons import activation
 import numpy as np
 from PIL import Image
 import PIL.ImageOps 
@@ -51,6 +51,6 @@ def predict(params,data):
 
     return predictions
 
-parameters = np.load('parameters.npy', allow_pickle=True)[()]
+#parameters = np.load('parameters.npy', allow_pickle=True)[()]
 
-Y_prediction_valid = predict(parameters,"camisa.jpg")
+#Y_prediction_valid = predict(parameters,"camisa.jpg")

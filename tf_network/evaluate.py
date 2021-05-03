@@ -1,4 +1,4 @@
-from data_prep import data_prep
+from .data_prep import data_prep
 from tensorflow import keras
 
 def evaluate(model, X_test, Y_test):

@@ -1,11 +1,11 @@
-from update_params import update
+from .update_params import update
 import numpy as np
-from init_params import init_params
-from forward_propagation import fw_prop
-from cost import cost_function
-from backpropagation import backpropagation
-from update_params import update
-from data_prep import data_preparation
+from .init_params import init_params
+from .forward_propagation import fw_prop
+from .cost import cost_function
+from .backpropagation import backpropagation
+from .update_params import update
+from .data_prep import data_preparation
 import matplotlib.pyplot as plt
 import time
 

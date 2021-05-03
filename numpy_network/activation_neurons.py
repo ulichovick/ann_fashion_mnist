@@ -1,7 +1,7 @@
-from hypothesis import hypothesis
-from sigmoid import sigmoid
-from softmax import softmax
-from relu import relu
+from .hypothesis import hypothesis
+from .sigmoid import sigmoid
+from .softmax import softmax
+from .relu import relu
 
 def activation(A_prev, W, b, activation = ""):
     """

@@ -1,7 +1,7 @@
-from data_prep import data_prep
-from seq_api import seq_api
-from compile import compile
-from evaluate import evaluate
+from .data_prep import data_prep
+from .seq_api import seq_api
+from .compile import compile
+from .evaluate import evaluate
 from tensorflow import keras
 
 def model():
