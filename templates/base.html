@@ -5,24 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"rel="stylesheet"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}"/>
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body class="is-preload">
-    <div class="wrapper">
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Actions</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="#">Predict</a>
-                </li>
-                <li>
-                    <a href="#">Statistics</a>
-                </li>
-            </ul>
+<body>
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+        <ul class="nav flex-column text-white w-100">
+            <a href="#" class="nav-link h3 text-white my-2">
+                Actions
+            </a>
+            <li href="{{url_for('welcome')}}" class="nav-link">
+                <span class="mx-2">Predict</span>
+            </li>
+            <li href="#" class="nav-link">
+                <span class="mx-2">Train</span>
+            </li>
+            <li href="#" class="nav-link">
+                <span class="mx-2">Statistics</span>
+            </li>
+        </ul>
+        <span href="#" class="nav-link h4 w-100 mb-5">
+            <a href="https://github.com/ulichovick/ann_fashion_mnist"><i class="bx bxl-github text-white"></i></a>
+            <a href="https://www.linkedin.com/in/andr%C3%A9s-rojas-parra-46144016b/"><i class="bx bxl-linkedin px-2 text-white"></i></a>
+        </span>
+    </div>
+    
+    <div class="p-1 my-container active-cont">
+        <nav class="navbar top-navbar navbar-light bg-light px-5">
+            <a class="btn border-0" id="menu-btn"><i class="bx bx-menu"></i></a>
         </nav>
+        <h1>Content</h1>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='/javascript/main.js') }}"></script>
 </body>
 </html>
