@@ -1,4 +1,23 @@
 {% extends "base.html" %}
 
 {% block title %}Neural Network{% endblock %}
-{% block content %} <h1>This is the index test for the content</h1>{% endblock %}
+{% block header %} <strong>Super Cool Neural Network</strong>{% endblock %}
+{% block content %}
+							<!-- Banner -->
+							<section id="banner">
+								<div class="content">
+									<header>
+										<h1>Hi, These are my first neural networks<br />
+										by Andrés Rojas</h1>
+										<p><strong>Two Neural networks that tell you what is in your image</strong> (or at least try to)</p>
+									</header>
+									<p>pending explanation</p>
+									<ul class="actions">
+										<li><a href="#" class="button big">Learn More</a></li>
+									</ul>
+								</div>
+								<span class="image object">
+									<img src="{{url_for('static', filename='/images/pic10.jpg')}}" alt="" />
+								</span>
+							</section>
+{% endblock %}
