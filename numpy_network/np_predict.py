@@ -8,7 +8,7 @@ def predict(params,data):
     """
     try to predict
     """
-    class_names = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
+    class_names = ["T-shirt-top", "Trouser", "Pullover", "Dress", "Coat",
                 "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
 
     #open the image and convert it to black and white or greyscale
@@ -47,7 +47,8 @@ def predict(params,data):
 
     predictions = np.argmax(AL, axis=0)
     del cache
-    print("The network predicts: " + str(np.array(class_names)[predictions]))
+    predictions = np.array(class_names)[predictions]
+    #print("The network predicts: " + str(np.array(class_names)[predictions]))
 
     return predictions
 

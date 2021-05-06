@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Neural Network{% endblock %}
+{% block header %} <strong>Super Cool Neural Network</strong>{% endblock %}
+{% block content %}
+			<!-- Banner -->
+			<section id="banner">
+				<div class="content">
+					<header>
+						<h1>Lets try to predict!</br></h1>
+						<p>Upload your image.</p>
+						<form method='POST' enctype=multipart/form-data>
+							<input type='file' name='file'>
+							<input type='submit' value='Predict'>
+						</form>
+					</header>
+					<p>pending explanation</p>
+					<ul class="actions">
+						<li><a href="#" class="button big">Learn More</a></li>
+					</ul>
+				</div>
+				<span class="image object">
+					<img src="{{url_for('static', filename='/images/pic10.jpg')}}" alt="" />
+				</span>
+			</section>
+{% endblock %}

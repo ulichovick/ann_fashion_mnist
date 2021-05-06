@@ -7,16 +7,18 @@
 							<section id="banner">
 								<div class="content">
 									<header>
-										<h1>Hi, These are my first neural networks</h1>
+										<h1>{{filename}}</h1>
 										<p><strong>Two Neural networks that tell you what is in your image</strong> (or at least try to)</p>
 									</header>
-									<p>pending explanation</p>
+									<p>The algorithm predicts: <strong> {{prediction}} </p>
 									<ul class="actions">
-										<li><a href="#" class="button big">Learn More</a></li>
+										<li><a href="{{url_for('upload_file')}}" class="button big">Try another</a></li>
 									</ul>
 								</div>
 								<span class="image object">
-									<img src="{{url_for('static', filename='/uploads/ia.jpg')}}" alt="" />
+									{% if filepath %}
+									<img src="{{url_for('static', filename=filepath)}}" alt="" />
+									{% endif %}
 								</span>
 							</section>
 {% endblock %}
