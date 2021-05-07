@@ -1,0 +1,24 @@
+from tf_network.tf_predict import predict as tf_pred
+
+@app.route('/predict', methods=['GET','POST'])
+def upload_file():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            #parameters = np.load('numpy_network/parameters.npy', allow_pickle=True)[()]
+            model = keras.models.load_model("tf_network/ann_tf_fashmnist.h5")
+            fpath = 'static/uploads/' + filename
+            prediction = tf_pred(model,fpath)
+            #fpath = 'static/uploads/'+ filename
+            #prediction = np_pred(parameters,fpath)[0]
+            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction))
+    else:
+        return render_template("predict.html")

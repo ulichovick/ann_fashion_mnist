@@ -9,8 +9,8 @@ def predict(model,data):
     """
     make predictions
     """
-    class_names = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
-                "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
+    class_names = ["T-shirt-top-Camiseta", "Trouser-Pantalón", "Pullover-Jersey-suéter", "Dress-Vestido", "Coat-Abrigo",
+                "Sandal-Sandalia", "Shirt-Camisa", "Sneaker-Zapatilla", "Bag-Bolso", "Ankle boot-Botines"]
     file = data
     #open the image and convert it to black and white or greyscale
     fname = Image.open(file).convert('L')
@@ -27,14 +27,15 @@ def predict(model,data):
     my_image = my_image.reshape(28,28)
     my_image = my_image.reshape(1,-1)
 
-
-    plt.imshow(image)
-    plt.show()
+    #plt.imshow(image)
+    #plt.show()
 
     y_pred = model.predict(my_image)
     predictions = np.argmax(y_pred)
-    print(predictions)
-    print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
+    prediction = np.array(class_names)[predictions]
+    return prediction
+    #print(predictions)
+    #print("The algorithm predicts: " + str(np.array(class_names)[predictions]))
 
 #model = keras.models.load_model("ann_tf_fashmnist.h5")
 #predict(model)

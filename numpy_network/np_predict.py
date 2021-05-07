@@ -8,8 +8,8 @@ def predict(params,data):
     """
     try to predict
     """
-    class_names = ["T-shirt-top", "Trouser", "Pullover", "Dress", "Coat",
-                "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
+    class_names = ["T-shirt-top-Camiseta", "Trouser-Pantalón", "Pullover-Jersey-suéter", "Dress-Vestido", "Coat-Abrigo",
+                "Sandal-Sandalia", "Shirt-Camisa", "Sneaker-Zapatilla", "Bag-Bolso", "Ankle boot-Botines"]
 
     #open the image and convert it to black and white or greyscale
     file = data
@@ -27,8 +27,8 @@ def predict(params,data):
     my_image = my_image.reshape(28,28)
     my_image = my_image.reshape(1,-1)
 
-    plt.imshow(image)
-    plt.show()
+    #plt.imshow(image)
+    #plt.show()
 
     A = my_image.T
 
