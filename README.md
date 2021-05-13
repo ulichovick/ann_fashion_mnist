@@ -1,2 +1,4 @@
 # ann_fashion_mnist
-A couple neural network built using numpy, tensorflow and keras 
+A cool flask application that uses two cool neural networks 
+one built with numpy and the other one built with tensorflow
+btw: sorry for my ~~bad~~ cool english :( 

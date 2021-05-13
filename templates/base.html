@@ -44,7 +44,13 @@
 									</header>
 									<ul>
 										<li><a href="{{url_for('welcome')}}">Index</a></li>
-										<li><a href="{{url_for('upload_file')}}">Predict</a></li>
+										<li>
+											<span class="opener">Predict</span>
+											<ul>
+												<li><a href="{{url_for('np_predict')}}">Numpy Network</a></li>
+												<li><a href="{{url_for('tf_predict')}}">Tensorflow Network</a></li>
+											</ul>
+										</li>
 										<li><a href="generic.html">Train</a></li>
 										<li><a href="elements.html">Statistics</a></li>
 									</ul>

@@ -1,2 +1,2 @@
 # ann_fashion_mnist
-A couple neural network built using numpy, tensorflow and keras 
+these are the contents of the Tensorflow network...and thats all folks(?

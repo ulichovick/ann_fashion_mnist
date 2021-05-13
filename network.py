@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
-import flask
 from werkzeug.utils import secure_filename
 import os
-import sys
 from numpy_network.np_predict import predict as np_pred
+from tf_network.tf_predict import predict as tf_pred
 import numpy as np
 from tensorflow import keras
 
@@ -18,8 +17,8 @@ def allowed_file(filename):
     return '.' in filename and \
             filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/predict', methods=['GET','POST'])
-def upload_file():
+@app.route('/np_predict', methods=['GET','POST'])
+def np_predict():
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -34,21 +33,40 @@ def upload_file():
             parameters = np.load('numpy_network/parameters.npy', allow_pickle=True)[()]
             fpath = 'static/uploads/'+ filename
             prediction = np_pred(parameters,fpath)[0]
-            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction))
+            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction,network="Numpy"))
     else:
-        return render_template("predict.html")
+        return render_template("predict.html", network="Numpy")
+
+@app.route('/tf_predict', methods=['GET','POST'])
+def tf_predict():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            model = keras.models.load_model("tf_network/ann_tf_fashmnist.h5")
+            fpath = 'static/uploads/' + filename
+            prediction = tf_pred(model,fpath)
+            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction,network="Tensorflow"))
+    else:
+        return render_template("predict.html", network="Tensorflow")
 
 @app.route("/predicted")
 def uploaded_file():
     filename = request.args.get('filename',None)
     prediction = request.args.get('prediction',None)
+    network = request.args.get('network',None)
     try:
-        return render_template('image.html', filepath='uploads/' + filename, filename=filename,prediction=prediction)
+        return render_template('image.html', filepath='uploads/' + filename, filename=filename,prediction=prediction,network=network)
     except IndexError:
         abort(404)
 
-#model = keras.models.load_model("tf_network/ann_tf_fashmnist.h5")
-#tf_pred(model, "tf_network/camiseta.jpg")
 
 @app.route("/")
 def welcome():
