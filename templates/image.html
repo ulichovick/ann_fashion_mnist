@@ -13,10 +13,10 @@
 									<p>The {{network}} network predicts: <strong> {{prediction}} </p>
 									<ul class="actions">
 										{% if network == "Tensorflow" %}
-										<li><a href="{{url_for('tf_predict')}}" class="button big">Try another</a></li>
+										<li><a href="{{url_for('tf_predict')}}" class="button big">Try again</a></li>
 										{% endif %}
 										{% if network == "Numpy" %}
-										<li><a href="{{url_for('np_predict')}}" class="button big">Try another</a></li>
+										<li><a href="{{url_for('np_predict')}}" class="button big">Try again</a></li>
 										{% endif %}
 									</ul>
 								</div>

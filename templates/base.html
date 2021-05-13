@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{url_for('static', filename='/css/main.css')}}" />
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	</head>
 	<body class="is-preload">
 
@@ -25,7 +26,6 @@
 									<a href="index.html" class="logo">{% block header %}{% endblock %}</a>
 									<ul class="icons">
 										<li><a href="https://github.com/ulichovick/ann_fashion_mnist" class="icon brands fa-github"><span class="label">Github</span></a></li>
-										<li><a href="https://www.linkedin.com/in/andr%C3%A9s-rojas-parra-46144016b/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
 									</ul>
 								</header>
 								{% block content %}{% endblock %}
@@ -61,10 +61,11 @@
 									<header class="major">
 										<h2>Get in touch</h2>
 									</header>
-									<p>some cool text</p>
+									<p>Here is my contact info</p>
 									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-										<li class="icon solid fa-phone">(000) 000-0000</li>
+										<li class="icon solid fa-envelope">ulichovick@gmail.com</li>
+										<li class="icon brands fa-github"><a href="https://github.com/ulichovick">Github</a></li>
+										<li class="icon brands fa-linkedin-in"><a href="https://www.linkedin.com/in/andr%C3%A9s-rojas-parra-46144016b/">Linkedin</a></li>
 									</ul>
 								</section>
 
