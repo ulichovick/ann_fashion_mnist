@@ -17,6 +17,12 @@ def allowed_file(filename):
     return '.' in filename and \
             filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route("/")
+def welcome():
+    return render_template(
+                            "index.html"
+    )
+
 @app.route('/np_predict', methods=['GET','POST'])
 def np_predict():
     if request.method == 'POST':
@@ -33,7 +39,7 @@ def np_predict():
             parameters = np.load('numpy_network/parameters.npy', allow_pickle=True)[()]
             fpath = 'static/uploads/'+ filename
             prediction = np_pred(parameters,fpath)[0]
-            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction,network="Numpy"))
+            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction,network="Numpy"), code=307)
     else:
         return render_template("predict.html", network="Numpy")
 
@@ -53,23 +59,20 @@ def tf_predict():
             model = keras.models.load_model("tf_network/ann_tf_fashmnist.h5")
             fpath = 'static/uploads/' + filename
             prediction = tf_pred(model,fpath)
-            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction,network="Tensorflow"))
+            return redirect(url_for('uploaded_file',filename=filename,prediction=prediction,network="Tensorflow"), code=307)
     else:
         return render_template("predict.html", network="Tensorflow")
 
-@app.route("/predicted")
+@app.route("/predicted", methods=['POST'])
 def uploaded_file():
-    filename = request.args.get('filename',None)
-    prediction = request.args.get('prediction',None)
-    network = request.args.get('network',None)
-    try:
-        return render_template('image.html', filepath='uploads/' + filename, filename=filename,prediction=prediction,network=network)
-    except IndexError:
-        abort(404)
-
-
-@app.route("/")
-def welcome():
-    return render_template(
-                            "index.html"
-    )
+    
+    if request.method == 'POST':
+        filename = request.args.get('filename',None)
+        prediction = request.args.get('prediction',None)
+        network = request.args.get('network',None)
+        try:
+            return render_template('image.html', filepath='uploads/' + filename, filename=filename,prediction=prediction,network=network)
+        except IndexError:
+            abort(404)
+    else:
+        abort(403)
