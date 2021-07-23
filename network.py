@@ -23,6 +23,12 @@ def welcome():
                             "index.html"
     )
 
+@app.route("/info")
+def info():
+    return render_template(
+                            "info.html"
+    )
+
 @app.route('/np_predict', methods=['GET','POST'])
 def np_predict():
     if request.method == 'POST':
