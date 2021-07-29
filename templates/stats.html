@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Neural Network{% endblock %}
+{% block header %} <strong>Super Cool Neural Network</strong>{% endblock %}
+{% block content %}
+							<!-- Banner -->
+							<section id="banner">
+								<div class="content">
+									<header>
+										<p><strong>Lets see some info of our networks</strong></p>
+									</header>
+									<p>The training set accuracy is: <strong> {{train_accu}} </strong></p>
+									<p>The validation set accuracy is: <strong> {{validation_accu}} </strong></p>
+									<p>The test set accuracy is: <strong> {{test_accu}} </strong></p>
+								</div>
+							</section>
+{% endblock %}
