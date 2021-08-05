@@ -12,6 +12,14 @@
 									<p>The training set accuracy is: <strong> {{train_accu}} </strong></p>
 									<p>The validation set accuracy is: <strong> {{validation_accu}} </strong></p>
 									<p>The test set accuracy is: <strong> {{test_accu}} </strong></p>
+									<div class="table-wrapper">
+									<h2>Train Heatmap</h2>
+									<img src="data:image/png;base64, {{ train_url }}">
+									<h2>validation Heatmap</h2>
+									<img src="data:image/png;base64, {{ valid_url }}">
+									<h2>Test Heatmap</h2>
+									<img src="data:image/png;base64, {{ test_url }}">
+									</div>
 								</div>
 							</section>
 {% endblock %}

@@ -3,10 +3,11 @@ from werkzeug.utils import secure_filename
 import os
 from numpy_network.np_predict import predict as np_pred
 from tf_network.tf_predict import predict as tf_pred
-from numpy_network.evaluate import evaluate
+from numpy_network.evaluate import evaluate, plot
 from numpy_network.data_prep import data_preparation
 import numpy as np
 from tensorflow import keras
+import gc
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -80,18 +81,33 @@ def evaluate_np():
 
     parameters = np.load('numpy_network/parameters.npy', allow_pickle=True)[()]
 
-    Y_prediction_train = evaluate(parameters,X_train,y_train)
+    Y_prediction_train, conf_mat_train,  class_names = evaluate(parameters,X_train,y_train)
     y_train = np.argmax(y_train, axis=0)
     train_accu = np.mean(Y_prediction_train == y_train) * 100
 
-    Y_prediction_valid = evaluate(parameters,X_valid,y_valid)
+    Y_prediction_valid, conf_mat_valid, class_names = evaluate(parameters,X_valid,y_valid)
     y_valid = np.argmax(y_valid, axis=0)
     validation_accu = np.mean(Y_prediction_valid == y_valid) * 100
 
-    Y_prediction_test = evaluate(parameters,X_test,y_test)
+    Y_prediction_test, conf_mat_test, class_names = evaluate(parameters,X_test,y_test)
     y_test = np.argmax(y_test, axis=0)
     test_accu = np.mean(Y_prediction_test == y_test) * 100
-    return render_template('stats.html', train_accu=train_accu, test_accu=test_accu, validation_accu=validation_accu)
+
+    train_matrix = plot(conf_mat_train, class_names)
+    valid_matrix = plot(conf_mat_valid, class_names)
+    test_matrix = plot(conf_mat_test, class_names)
+
+    del Y_prediction_train, Y_prediction_test, Y_prediction_valid, parameters, X_train, y_train, X_valid, y_valid, X_test, y_test
+    gc.collect()
+
+    return render_template('stats.html', train_accu=train_accu,
+                            test_accu=test_accu,
+                            validation_accu=validation_accu,
+                            conf_mat_test=conf_mat_test,
+                            class_names=class_names,
+                            train_url=train_matrix,
+                            valid_url=valid_matrix,
+                            test_url=test_matrix)
 
 @app.route("/predicted", methods=['POST'])
 def uploaded_file():

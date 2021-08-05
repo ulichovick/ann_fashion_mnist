@@ -34,11 +34,6 @@ def model(X, Y, layer_dims, learning_rate=0.5, num_iters=5, print_cost=False ):
 
         costs.append(cost)
 
-    plt.plot(costs)
-    plt.ylabel('cost')
-    plt.xlabel('iterations (per hundreds)')
-    plt.title("Learning rate =" + str(learning_rate))
-    plt.show()
     return parameters
 
 
