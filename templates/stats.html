@@ -1,24 +1,74 @@
 {% extends "base.html" %}
 
 {% block title %}Neural Network{% endblock %}
-{% block header %} <strong>Super Cool Neural Network</strong>{% endblock %}
+{% block header %} <strong>Super Cool Neural Network</strong>{% endblock %} 
 {% block content %}
 							<!-- Banner -->
 							<section id="banner">
-								<div class="content">
+								<div class="container">
 									<header>
-										<p><strong>Lets see some info of our networks</strong></p>
+										<h1 align="center">Numpy nework stats</h1>
 									</header>
-									<p>The training set accuracy is: <strong> {{train_accu}} </strong></p>
-									<p>The validation set accuracy is: <strong> {{validation_accu}} </strong></p>
-									<p>The test set accuracy is: <strong> {{test_accu}} </strong></p>
-									<div class="table-wrapper">
-									<h2>Train Heatmap</h2>
-									<img src="data:image/png;base64, {{ train_url }}">
-									<h2>validation Heatmap</h2>
-									<img src="data:image/png;base64, {{ valid_url }}">
-									<h2>Test Heatmap</h2>
-									<img src="data:image/png;base64, {{ test_url }}">
+									<div class="row">
+										<div class="col-sm-5">
+											<h2>Training set</h2>
+											<p>The training set accuracy is: <strong> {{train_accu}} </strong></p>
+											<table>
+												<thead>
+													<tr>
+													{% for label in class_names %}
+														<th>
+															{{label}}
+														</th>
+													{% endfor %}
+													</tr>
+												</thead>
+												<tbody>
+													{% for key,value in class_rep_train.items() %}
+													<tr>
+														{% for key,value in value.items() %}
+															<td>
+																{{key}}
+															</td>
+													</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										</div>
+										<div class="col-sm-7">
+											<span class="card" style="width: 350px;">
+												<img src="data:image/png;base64, {{ train_url }}"class="card-img-top" style="width: 100%;">
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<!-- Break -->
+										<div class="col-sm-4">
+											<h2>Validation set</h2>
+											<p>The validation set accuracy is: <strong> {{validation_accu}} </strong></p>
+											<p>scores scores scores scores scores scores scores</p>
+											<p>scores scores scores scores scores scores scores</p>
+											<p>scores scores scores scores scores scores scores</p>
+										</div>
+										<div class="col-sm-8">
+											<span class="card" style="width: 350px;">
+												<img src="data:image/png;base64, {{ valid_url }}"class="card-img-top" style="width: 100%;">
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<!-- Break -->
+										<div class="col-sm-4">
+											<h2>Test Set</h2>
+											<p>The test set accuracy is: <strong> {{test_accu}} </strong></p>
+											<p>scores scores scores scores scores scores scores</p>
+											<p>scores scores scores scores scores scores scores</p>
+										</div>
+										<div class="col-sm-8">
+											<span class="card" style="width: 350px;">
+												<img src="data:image/png;base64, {{ test_url }}"class="card-img-top" style="width: 100%;">
+											</span>
+										</div>
 									</div>
 								</div>
 							</section>

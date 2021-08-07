@@ -81,15 +81,15 @@ def evaluate_np():
 
     parameters = np.load('numpy_network/parameters.npy', allow_pickle=True)[()]
 
-    Y_prediction_train, conf_mat_train,  class_names = evaluate(parameters,X_train,y_train)
+    Y_prediction_train, conf_mat_train, class_rep_train, class_names = evaluate(parameters,X_train,y_train)
     y_train = np.argmax(y_train, axis=0)
     train_accu = np.mean(Y_prediction_train == y_train) * 100
 
-    Y_prediction_valid, conf_mat_valid, class_names = evaluate(parameters,X_valid,y_valid)
+    Y_prediction_valid, conf_mat_valid, class_rep_valid, class_names = evaluate(parameters,X_valid,y_valid)
     y_valid = np.argmax(y_valid, axis=0)
     validation_accu = np.mean(Y_prediction_valid == y_valid) * 100
 
-    Y_prediction_test, conf_mat_test, class_names = evaluate(parameters,X_test,y_test)
+    Y_prediction_test, conf_mat_test, class_rep_test, class_names = evaluate(parameters,X_test,y_test)
     y_test = np.argmax(y_test, axis=0)
     test_accu = np.mean(Y_prediction_test == y_test) * 100
 
@@ -101,13 +101,14 @@ def evaluate_np():
     gc.collect()
 
     return render_template('stats.html', train_accu=train_accu,
-                            test_accu=test_accu,
-                            validation_accu=validation_accu,
-                            conf_mat_test=conf_mat_test,
-                            class_names=class_names,
-                            train_url=train_matrix,
-                            valid_url=valid_matrix,
-                            test_url=test_matrix)
+                    test_accu=test_accu,
+                    validation_accu=validation_accu,
+                    conf_mat_test=conf_mat_test,
+                    class_names=class_names,
+                    train_url=train_matrix,
+                    valid_url=valid_matrix,
+                    class_rep_train=class_rep_train,
+                    test_url=test_matrix)
 
 @app.route("/predicted", methods=['POST'])
 def uploaded_file():

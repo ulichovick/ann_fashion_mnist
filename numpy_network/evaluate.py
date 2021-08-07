@@ -1,11 +1,12 @@
 import matplotlib
+from sklearn.utils.multiclass import class_distribution
 matplotlib.use('agg')
 import base64
 from io import BytesIO
 from matplotlib import pyplot as plt
 import numpy as np
 from .forward_propagation import fw_prop
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 import gc
 
 def evaluate(params,data,y):
@@ -21,9 +22,10 @@ def evaluate(params,data,y):
 
     y_fixed = np.argmax(y, axis=0)
     conf_mat = confusion_matrix(y_fixed, predictions)
+    class_rep = classification_report(y_fixed, predictions, output_dict=True, target_names=class_names)
     del caches, acache, AL, params, data, y
     gc.collect()
-    return predictions, conf_mat, class_names
+    return predictions, conf_mat,class_rep, class_names
 
 def plot(conf_mat, class_names):
     """
@@ -44,9 +46,9 @@ def plot(conf_mat, class_names):
     img = BytesIO()
     plt.savefig(img, format='png')
     plt.clf()
-    plt.close()
+    plt.close('all')
     del conf_mat, class_names
     gc.collect()
     plot_url = base64.b64encode(img.getbuffer()).decode("ascii")
-
+    del img
     return plot_url
