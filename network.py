@@ -108,6 +108,8 @@ def evaluate_np():
                     train_url=train_matrix,
                     valid_url=valid_matrix,
                     class_rep_train=class_rep_train,
+                    class_rep_valid=class_rep_valid,
+                    class_rep_test=class_rep_test,
                     test_url=test_matrix)
 
 @app.route("/predicted", methods=['POST'])
