@@ -12,7 +12,6 @@
 									<div class="row">
 										<div class="col-sm-5">
 											<h2>Training set</h2>
-											<p>The training set accuracy is: <strong> {{'%0.2f'|format(train_accu)}} </strong></p>
 											<table>
 												<thead>
 													<tr>
@@ -49,7 +48,7 @@
 										</div>
 										<div class="col-sm-7">
 											<span class="card" style="width: 350px;">
-												<img src="data:image/png;base64, {{ train_url }}"class="card-img-top" style="width: 100%;">
+												<img src="{{url_for('static', filename='/graphs/train_matrix.png')}}"class="card-img-top" style="width: 100%;">
 											</span>
 										</div>
 									</div>
@@ -57,7 +56,6 @@
 										<!-- Break -->
 										<div class="col-sm-4">
 											<h2>Validation set</h2>
-											<p>The validation set accuracy is: <strong> {{'%0.2f'|format(validation_accu)}} </strong></p>
 											<table>
 												<thead>
 													<tr>
@@ -94,7 +92,7 @@
 										</div>
 										<div class="col-sm-8">
 											<span class="card" style="width: 350px;">
-												<img src="data:image/png;base64, {{ valid_url }}"class="card-img-top" style="width: 100%;">
+												<img src="{{url_for('static', filename='/graphs/valid_matrix.png')}}"class="card-img-top" style="width: 100%;">
 											</span>
 										</div>
 									</div>
@@ -102,7 +100,6 @@
 										<!-- Break -->
 										<div class="col-sm-4">
 											<h2>Test Set</h2>
-											<p>The test set accuracy is: <strong> {{'%0.2f'|format(test_accu)}} </strong></p>
 											<table>
 												<thead>
 													<tr>
@@ -139,7 +136,7 @@
 										</div>
 										<div class="col-sm-8">
 											<span class="card" style="width: 350px;">
-												<img src="data:image/png;base64, {{ test_url }}"class="card-img-top" style="width: 100%;">
+												<img src="{{url_for('static', filename='/graphs/test_matrix.png')}}"class="card-img-top" style="width: 100%;">
 											</span>
 										</div>
 									</div>

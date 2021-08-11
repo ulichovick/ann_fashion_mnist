@@ -8,6 +8,7 @@ from numpy_network.data_prep import data_preparation
 import numpy as np
 from tensorflow import keras
 import gc
+import json
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -72,45 +73,68 @@ def tf_predict():
     else:
         return render_template("predict.html", network="Tensorflow")
 
-@app.route("/evaluate_np")
+@app.route('/train', methods=['GET','POST'])
+def train_np():
+    """
+    testing function
+    """
+    if request.method == 'GET':
+        return render_template("train.html")
+    else:
+        return redirect(url_for('evaluate_np'), code=307)
+
+@app.route("/evaluate_np", methods=['GET','POST'])
 def evaluate_np():
     """
     evaluate the model
     """
-    X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
+    if request.method == "POST":
+        X_train, y_train, X_valid, y_valid, X_test, y_test = data_preparation()
 
-    parameters = np.load('numpy_network/parameters.npy', allow_pickle=True)[()]
+        parameters = np.load('numpy_network/parameters.npy', allow_pickle=True)[()]
 
-    Y_prediction_train, conf_mat_train, class_rep_train, class_names = evaluate(parameters,X_train,y_train)
-    y_train = np.argmax(y_train, axis=0)
-    train_accu = np.mean(Y_prediction_train == y_train) * 100
+        Y_prediction_train, conf_mat_train, class_rep_train, class_names = evaluate(parameters,X_train,y_train,"train_scores")
+        y_train = np.argmax(y_train, axis=0)
+        train_accu = np.mean(Y_prediction_train == y_train) * 100
 
-    Y_prediction_valid, conf_mat_valid, class_rep_valid, class_names = evaluate(parameters,X_valid,y_valid)
-    y_valid = np.argmax(y_valid, axis=0)
-    validation_accu = np.mean(Y_prediction_valid == y_valid) * 100
+        Y_prediction_valid, conf_mat_valid, class_rep_valid, class_names = evaluate(parameters,X_valid,y_valid,"valid_scores")
+        y_valid = np.argmax(y_valid, axis=0)
+        validation_accu = np.mean(Y_prediction_valid == y_valid) * 100
 
-    Y_prediction_test, conf_mat_test, class_rep_test, class_names = evaluate(parameters,X_test,y_test)
-    y_test = np.argmax(y_test, axis=0)
-    test_accu = np.mean(Y_prediction_test == y_test) * 100
+        Y_prediction_test, conf_mat_test, class_rep_test, class_names = evaluate(parameters,X_test,y_test,"test_scores")
+        y_test = np.argmax(y_test, axis=0)
+        test_accu = np.mean(Y_prediction_test == y_test) * 100
 
-    train_matrix = plot(conf_mat_train, class_names)
-    valid_matrix = plot(conf_mat_valid, class_names)
-    test_matrix = plot(conf_mat_test, class_names)
+        train_matrix = plot(conf_mat_train, class_names, "train_matrix")
+        valid_matrix = plot(conf_mat_valid, class_names,  "valid_matrix")
+        test_matrix = plot(conf_mat_test, class_names, "test_matrix")
 
-    del Y_prediction_train, Y_prediction_test, Y_prediction_valid, parameters, X_train, y_train, X_valid, y_valid, X_test, y_test
-    gc.collect()
+        del Y_prediction_train, Y_prediction_test, Y_prediction_valid, parameters, X_train, y_train, X_valid, y_valid, X_test, y_test
+        gc.collect()
 
-    return render_template('stats.html', train_accu=train_accu,
-                    test_accu=test_accu,
-                    validation_accu=validation_accu,
-                    conf_mat_test=conf_mat_test,
-                    class_names=class_names,
-                    train_url=train_matrix,
-                    valid_url=valid_matrix,
-                    class_rep_train=class_rep_train,
-                    class_rep_valid=class_rep_valid,
-                    class_rep_test=class_rep_test,
-                    test_url=test_matrix)
+        return render_template('stats.html', train_accu=train_accu,
+                        test_accu=test_accu,
+                        validation_accu=validation_accu,
+                        conf_mat_test=conf_mat_test,
+                        class_names=class_names,
+                        train_url=train_matrix,
+                        valid_url=valid_matrix,
+                        class_rep_train=class_rep_train,
+                        class_rep_valid=class_rep_valid,
+                        class_rep_test=class_rep_test,
+                        test_url=test_matrix)
+    else:
+        with open('numpy_network/train_scores.json', 'r') as openfile:
+            train_scores = json.load(openfile)
+        with open('numpy_network/valid_scores.json', 'r') as openfile:
+            valid_scores = json.load(openfile)
+        with open('numpy_network/test_scores.json', 'r') as openfile:
+            test_scores = json.load(openfile)
+        return render_template('stats.html',
+                                            class_rep_train=train_scores,
+                                            class_rep_valid=valid_scores,
+                                            class_rep_test=test_scores)
+
 
 @app.route("/predicted", methods=['POST'])
 def uploaded_file():
